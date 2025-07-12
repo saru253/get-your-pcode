@@ -2,85 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Watch & Unlock – Tools by Sarthak</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #eee;
-      text-align: center;
-      padding: 20px;
-    }
-    h2, h3 { color: #ff4757; }
-    button {
-      background: #1e90ff;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 10px 0;
-    }
-    button:hover {
-      background: #0f7be6;
-    }
-    .section {
-      margin: 30px auto;
-      max-width: 480px;
-    }
-    iframe {
-      border-radius: 8px;
-      border: none;
-    }
-    #status {
-      margin-top: 40px;
-      font-size: 18px;
-      color: #ffa502;
-    }
+    body{font-family:Arial,Helvetica,sans-serif;background:#111;color:#eee;text-align:center;padding:20px}
+    h2,h3{color:#ff4757}
+    button{background:#1e90ff;color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:16px;cursor:pointer;margin:10px 0}
+    button:hover{background:#0f7be6}
+    .section{margin:30px auto;max-width:480px}
+    iframe{border-radius:8px;border:none}
+    #status{margin-top:40px;font-size:18px;color:#ffa502}
   </style>
 </head>
 <body>
 
-  <h2>🎬 Step 1: Watch & Subscribe</h2>
+  <!-- STEP 1 -->
+  <h2>🎬 Step 1: Watch & Subscribe</h2>
   <div class="section">
     <iframe width="100%" height="200" src="https://www.youtube.com/embed/CpuWVkojqWA" allowfullscreen></iframe>
-    <p>Tap the button below to open YouTube and subscribe, then return here.</p>
+    <p>Tap the button below to open YouTube, like &amp; subscribe, then return here.</p>
     <a href="https://youtu.be/CpuWVkojqWA?si=MvWt0FF4MWTGXc4C" target="_blank">
       <button>Open on YouTube</button>
     </a>
   </div>
 
-  <h3>🛠 Step 2: Try Our Reelsaver Tool</h3>
+  <!-- STEP 2 -->
+  <h3>🛠 Step 2: Try Our Reelsaver Tool</h3>
   <div class="section">
-    <p>Click below to open <strong>Reelsaver</strong>.</p>
     <a href="https://reelsaver.netlify.app" target="_blank">
       <button>Open Reelsaver</button>
     </a>
   </div>
 
-  <h3>🔍 Step 3: Discover Movies Instantly</h3>
+  <!-- STEP 3 -->
+  <h3>🔍 Step 3: Discover Movies Instantly</h3>
   <div class="section">
-    <p>Click below to explore <strong>MovieSearcher</strong>.</p>
     <a href="https://movie-searcher-beige.vercel.app" target="_blank">
       <button>Open MovieSearcher</button>
     </a>
   </div>
 
+  <!-- STATUS / PCODE -->
   <p id="status">⌛ Verifying your task, please wait<span id="dots">.</span></p>
 
   <script>
-    // Infinite loading animation (no real code)
+    // 1) dots animation (looks like processing)
     let dots = 1;
-    setInterval(function() {
+    setInterval(() => {
       dots = (dots + 1) % 4;
       document.getElementById('dots').textContent = '.'.repeat(dots);
-    }, 1000);
+    }, 800);
+
+    // 2) after 30 sec show fake PCode
+    setTimeout(() => {
+      document.getElementById('status').innerHTML =
+        '✅ Verification complete!<br><strong>Your PCode: MS‑RS‑2025</strong>';
+      document.getElementById('status').style.color = '#2ed573';
+    }, 30000);    // 30 000 ms = 30 sec
   </script>
 
   <footer style="margin-top:60px;font-size:13px;color:#666;">
-    Created by Sarthak Shinde | 2025
+    Created by Sarthak Shinde | 2025
   </footer>
 </body>
 </html>
