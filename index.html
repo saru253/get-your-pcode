@@ -6,63 +6,72 @@
   <title>Watch & Unlock – Tools by Sarthak</title>
   <style>
     body{font-family:Arial,Helvetica,sans-serif;background:#111;color:#eee;text-align:center;padding:20px}
-    h2,h3{color:#ff4757}
-    button{background:#1e90ff;color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:16px;cursor:pointer;margin:10px 0}
+    h2,h3{color:#ff4757;margin-top:30px}
+    button{background:#1e90ff;color:#fff;border:none;border-radius:6px;padding:10px 20px;
+      font-size:16px;cursor:pointer;margin:12px 0}
     button:hover{background:#0f7be6}
-    .section{margin:30px auto;max-width:480px}
+    .section{margin:0 auto;max-width:480px}
     iframe{border-radius:8px;border:none}
     #status{margin-top:40px;font-size:18px;color:#ffa502}
   </style>
 </head>
 <body>
 
-  <!-- STEP 1 -->
-  <h2>🎬 Step 1: Watch & Subscribe</h2>
+  <h2>🎬 Step 1 – Watch & Subscribe</h2>
   <div class="section">
-    <iframe width="100%" height="200" src="https://www.youtube.com/embed/CpuWVkojqWA" allowfullscreen></iframe>
-    <p>Tap the button below to open YouTube, like &amp; subscribe, then return here.</p>
-    <a href="https://youtu.be/CpuWVkojqWA?si=MvWt0FF4MWTGXc4C" target="_blank">
-      <button>Open on YouTube</button>
-    </a>
+    <iframe width="100%" height="200"
+            src="https://www.youtube.com/embed/CpuWVkojqWA" allowfullscreen></iframe>
+    <p>Tap the button, like & subscribe, फिर वापस आओ।</p>
+    <button id="ytBtn"
+            onclick="taskDone('yt');window.open('https://youtu.be/CpuWVkojqWA?si=MvWt0FF4MWTGXc4C','_blank')">
+      Open on YouTube
+    </button>
   </div>
 
-  <!-- STEP 2 -->
-  <h3>🛠 Step 2: Try Our Reelsaver Tool</h3>
+  <h3>🛠 Step 2 – Try Reelsaver Tool</h3>
   <div class="section">
-    <a href="https://reelsaver.netlify.app" target="_blank">
-      <button>Open Reelsaver</button>
-    </a>
+    <button onclick="taskDone('rs');window.open('https://reelsaver.netlify.app','_blank')">
+      Open Reelsaver
+    </button>
   </div>
 
-  <!-- STEP 3 -->
-  <h3>🔍 Step 3: Discover Movies Instantly</h3>
+  <h3>🔍 Step 3 – Discover Movies</h3>
   <div class="section">
-    <a href="https://movie-searcher-beige.vercel.app" target="_blank">
-      <button>Open MovieSearcher</button>
-    </a>
+    <button onclick="taskDone('ms');window.open('https://movie-searcher-beige.vercel.app','_blank')">
+      Open MovieSearcher
+    </button>
   </div>
 
-  <!-- STATUS / PCODE -->
-  <p id="status">⌛ Verifying your task, please wait<span id="dots">.</span></p>
+  <p id="status">⌛ Waiting for required actions<span id="dots">.</span></p>
 
   <script>
-    // 1) dots animation (looks like processing)
+    const dotsEl = document.getElementById('dots');
     let dots = 1;
-    setInterval(() => {
-      dots = (dots + 1) % 4;
-      document.getElementById('dots').textContent = '.'.repeat(dots);
-    }, 800);
+    setInterval(()=>{ dots=(dots+1)%4; dotsEl.textContent='.'.repeat(dots); },800);
 
-    // 2) after 30 sec show fake PCode
-    setTimeout(() => {
+    const done={yt:false,rs:false,ms:false}, waitSec=600;
+
+    function taskDone(k){ done[k]=true; checkReady(); }
+
+    function checkReady(){
+      const toolsDone = (done.rs?1:0)+(done.ms?1:0);
+      if(done.yt && toolsDone>=1 && !window.waiting){
+        window.waiting = true;
+        document.getElementById('status').innerHTML =
+          `⌛ Watch full video and wait ${waitSec} (10 minutes)…;
+        setTimeout(showCode, waitSec*1000000000000000);
+      }
+    }
+
+    function showCode(){
       document.getElementById('status').innerHTML =
         '✅ Verification complete!<br><strong>Your PCode: MS‑RS‑2025</strong>';
-      document.getElementById('status').style.color = '#2ed573';
-    }, 30000);    // 30 000 ms = 30 sec
+      document.getElementById('status').style.color='#2ed573';
+    }
   </script>
 
   <footer style="margin-top:60px;font-size:13px;color:#666;">
-    Created by Sarthak Shinde | 2025
+    Created by Sarthak Shinde | 2025
   </footer>
 </body>
 </html>
